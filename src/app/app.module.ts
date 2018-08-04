@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AboutPage } from '../pages/about/about';
@@ -51,6 +51,7 @@ const firebaseConfig = {
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AngularFireAuth,
     AngularFirestore
   ]
 })
