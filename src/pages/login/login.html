@@ -13,12 +13,15 @@
   <form (ngSubmit)="login()">
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
+      <ion-input type="text" [(ngModel)]="email" name="email" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-textarea [(ngModel)]="password" name="password"></ion-textarea>
+      <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
     </ion-item>
+    <br>
     <button ion-button type="submit" block>Login</button>
   </form>
+  <br>
+  <button ion-button color="light" (click)="signUp()" block>SignUp</button>
 </ion-content>

@@ -5,14 +5,21 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>SignUp</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
+  <form (ngSubmit)="signUp()">
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="email" name="email" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
+    </ion-item>
+    <br>
+    <button ion-button type="submit" block>Sign Up</button>
+  </form>
 </ion-content>
