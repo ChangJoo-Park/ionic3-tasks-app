@@ -5,14 +5,20 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Login</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
+  <form (ngSubmit)="login()">
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-textarea [(ngModel)]="password" name="password"></ion-textarea>
+    </ion-item>
+    <button ion-button type="submit" block>Login</button>
+  </form>
 </ion-content>
