@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
-// import { auth } from 'firebase';
-
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the LoginPage page.
  *
@@ -18,30 +16,21 @@ import { AngularFireAuth } from 'angularfire2/auth';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  email: string;
+  password: string;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
-    public loadingCtrl: LoadingController,
-    public afAuth: AngularFireAuth
+    public navParams: NavParams
   ) {
   }
 
   ionViewDidLoad() {
-    this.checkAlreadyLoggedIn();
+    console.log('ionViewDidLoad')
   }
 
-  checkAlreadyLoggedIn() {
-
-    const loader = this.loadingCtrl.create();
-    loader.present();
-    this.afAuth.auth.onAuthStateChanged((user) => {
-      loader.dismiss();
-      if (user) {
-
-      } else {
-
-      }
-    })
+  login() {
+    console.log('login clicked')
+    this.navCtrl.push(TabsPage, {}, { animate: true });
   }
 }
