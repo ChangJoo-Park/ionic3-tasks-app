@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 
 /**
@@ -20,7 +20,8 @@ export class SignUpPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    public loadingCtrl: LoadingController
   ) {
   }
 
@@ -29,11 +30,15 @@ export class SignUpPage {
   }
 
   async signUp() {
+    const loader = this.loadingCtrl.create()
+    loader.present()
     try {
       await this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
       this.navCtrl.pop()
     } catch (error) {
       console.error(error)
+    } finally {
+      loader.dismiss()
     }
   }
 }

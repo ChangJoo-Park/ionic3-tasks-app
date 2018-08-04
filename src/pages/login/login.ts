@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
-import { SignUpPage } from '../sign-up/sign-up';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -24,7 +24,8 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    public loadingCtrl: LoadingController
   ) {
   }
 
@@ -33,11 +34,16 @@ export class LoginPage {
   }
 
   async login() {
+    const loader = this.loadingCtrl.create()
+    loader.present()
+
     try {
-      const user = await this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(this.email, this.password)
+      await this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(this.email, this.password)
       this.navCtrl.push(TabsPage, {}, { animate: true });
     } catch (error) {
       console.error(error)
+    } finally {
+      loader.dismiss()
     }
   }
 
