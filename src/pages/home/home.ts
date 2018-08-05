@@ -49,8 +49,22 @@ export class HomePage {
     this.navCtrl.push('SearchPage')
   }
 
+  newList() {
+    this.navCtrl.push('ListNewPage')
+  }
+
   itemSelected(item) {
     const taskModal = this.modalCtrl.create('TodoEditPage', { item });
     taskModal.present()
   }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
 }

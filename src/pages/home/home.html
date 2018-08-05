@@ -8,26 +8,55 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <button ion-item>
+      <ion-icon name="archive" item-start></ion-icon>
+      수신함
+    </button>
+    <button ion-item>
+      <ion-icon name="at" item-start></ion-icon>
+      나에게 지정됨
+    </button>
+    <button ion-item>
+      <ion-icon name="calendar" item-start></ion-icon>
+      주
+    </button>
+    <button ion-item>
+      <ion-icon name="done-all" item-start></ion-icon>
+      모두
+    </button>
+    <button ion-item>
+      <ion-icon name="list" item-start></ion-icon>
+      목록 샘플
+    </button>
+    <button ion-item color="light" (click)="newList()">
+      <ion-icon name="add" item-start></ion-icon>
+      목록 작성
+    </button>
+  </ion-list>
   <!-- <ion-list>
-    <ion-item-sliding *ngFor="let item of items | async">
-      <ion-item (click)="itemSelected(item)">
+    <ion-item-sliding *ngFor="let item of items | async ">
+      <ion-item (click)="itemSelected(item) ">
         <h2>{{ item.title }}</h2>
         <p>{{ item.note }}</p>
       </ion-item>
-      <ion-item-options side="right">
-        <button ion-button color="light">
-          <ion-icon name="archive"></ion-icon>
+      <ion-item-options side="right ">
+        <button ion-button color="light ">
+          <ion-icon name="archive "></ion-icon>
           Archive
         </button>
-        <button ion-button color="primary">
-          <ion-icon name="checkmark"></ion-icon>
+        <button ion-button color="primary ">
+          <ion-icon name="checkmark "></ion-icon>
           Done
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list> -->
-  <ion-fab right bottom (click)="newTodo()">
+  <ion-fab right bottom (click)="newTodo() ">
     <button ion-fab color="primary">
       <ion-icon name="add"></ion-icon>
     </button>
