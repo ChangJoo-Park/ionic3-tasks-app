@@ -2,16 +2,17 @@ export class Task {
   title: string;
   note: string = '';
   userId: string;
-  dueTo: number = 0;
+  dueDate: number = 0;
   done: boolean = false;
   // Date
   createdAt: number = (new Date()).getTime();
   updatedAt: number = (new Date()).getTime();
 
-  constructor(title: string, note: string, userId: string) {
-    this.title = title || '';
-    this.note = note || '';
+  constructor(title: string = '', note: string = '', userId: string, dueDate: string = '') {
+    this.title = title;
+    this.note = note;
     this.userId = userId;
+    this.dueDate = dueDate === '' ? 0 : (new Date(dueDate)).getTime();
   }
 
   toJSON() {
@@ -19,7 +20,7 @@ export class Task {
       title: this.title,
       note: this.note,
       userId: this.userId,
-      dueTo: this.dueTo,
+      dueDate: this.dueDate,
       done: this.done,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt

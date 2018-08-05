@@ -22,6 +22,7 @@ export class TodoNewPage {
   title: string;
   note: string;
   userId: string;
+  dueDate: string;
 
   constructor(
     public navCtrl: NavController,
@@ -32,7 +33,6 @@ export class TodoNewPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TodoNewPage');
     this.afAuth.authState.subscribe(user => {
       if (user) this.userId = user.uid
     })
@@ -40,9 +40,9 @@ export class TodoNewPage {
 
   save() {
     try {
-      const newTask = new Task(this.title, this.note, this.userId)
+      const newTask = (new Task(this.title, this.note, this.userId, this.dueDate)).toJSON()
       this.afStore.collection('tasks')
-        .add(newTask.toJSON())
+        .add(newTask)
         .then(_ => this.navCtrl.pop());
     } catch (error) {
       console.error(error)
