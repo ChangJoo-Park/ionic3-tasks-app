@@ -42,7 +42,9 @@ export class TodoNewPage {
       const item = {
         title: this.title,
         note: this.note,
-        userId: this.userId
+        userId: this.userId,
+        createdAt: (new Date()).getTime(),
+        updatedAt: (new Date()).getTime()
       }
       this.afStore.collection('items').add(item)
       this.navCtrl.pop();
