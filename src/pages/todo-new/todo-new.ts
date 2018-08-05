@@ -43,11 +43,7 @@ export class TodoNewPage {
       const newTask = new Task(this.title, this.note, this.userId)
       this.afStore.collection('tasks')
         .add(newTask.toJSON())
-        .then(res => {
-          console.log('res => ', res)
-          this.navCtrl.pop();
-        })
-
+        .then(_ => this.navCtrl.pop());
     } catch (error) {
       console.error(error)
     } finally {
