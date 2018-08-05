@@ -9,7 +9,9 @@ import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'SettingPage'
+})
 @Component({
   selector: 'page-setting',
   templateUrl: 'setting.html',
