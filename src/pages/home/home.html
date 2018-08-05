@@ -1,16 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Tasks</ion-title>
+    <ion-title (click)="setting()">Tasks</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="newTodo()">
-        <ion-icon name="create"></ion-icon>
+      <button ion-button icon-only (click)="search()">
+        <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-  <ion-list>
+  <!-- <ion-list>
     <ion-item-sliding *ngFor="let item of items | async">
       <ion-item (click)="itemSelected(item)">
         <h2>{{ item.title }}</h2>
@@ -27,5 +26,10 @@
         </button>
       </ion-item-options>
     </ion-item-sliding>
-  </ion-list>
+  </ion-list> -->
+  <ion-fab right bottom (click)="newTodo()">
+    <button ion-fab color="primary">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

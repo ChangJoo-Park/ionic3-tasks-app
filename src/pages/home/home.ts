@@ -41,6 +41,14 @@ export class HomePage {
     this.navCtrl.push('TodoNewPage')
   }
 
+  setting() {
+    this.navCtrl.push('SettingPage')
+  }
+
+  search() {
+    this.navCtrl.push('SearchPage')
+  }
+
   itemSelected(item) {
     const taskModal = this.modalCtrl.create('TodoEditPage', { item });
     taskModal.present()
