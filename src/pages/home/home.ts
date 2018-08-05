@@ -28,7 +28,7 @@ export class HomePage {
       this.afAuth.authState
         .subscribe(user =>
           this.items = this.afStore
-            .collection('items', ref => ref.where('userId', '==', user.uid).orderBy('createdAt', 'desc'))
+            .collection('items', ref => ref.where('userId', '==', user.uid).orderBy('createdAt', 'asc'))
             .valueChanges()
         )
     } catch (error) {
