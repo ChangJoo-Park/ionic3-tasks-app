@@ -38,7 +38,7 @@ export class LoginPage {
     loader.present()
 
     try {
-      await this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(this.email, this.password)
+      await this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
       this.navCtrl.push(HomePage, {}, { animate: true });
     } catch (error) {
       console.error(error)
