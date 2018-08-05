@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
+import { IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -39,7 +39,7 @@ export class LoginPage {
 
     try {
       await this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(this.email, this.password)
-      this.navCtrl.push(TabsPage, {}, { animate: true });
+      this.navCtrl.push(HomePage, {}, { animate: true });
     } catch (error) {
       console.error(error)
     } finally {

@@ -10,9 +10,8 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { TabsPage } from '../pages/tabs/tabs';
-import { MyApp } from './app.component';
 import { SettingPage } from '../pages/setting/setting';
+import { MyApp } from './app.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDXMLLo-P2DGPuuA0dT6hwYcrwRAWB0Wqo",
@@ -30,7 +29,6 @@ const firebaseConfig = {
     ContactPage,
     HomePage,
     SettingPage,
-    TabsPage,
     LoginPage
   ],
   imports: [
@@ -47,7 +45,6 @@ const firebaseConfig = {
     ContactPage,
     HomePage,
     SettingPage,
-    TabsPage,
     LoginPage
   ],
   providers: [
