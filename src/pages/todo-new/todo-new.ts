@@ -51,4 +51,8 @@ export class TodoNewPage {
       console.log('ended')
     }
   }
+
+  resetDueDate() {
+    this.dueDate = null
+  }
 }

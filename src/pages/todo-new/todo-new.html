@@ -12,19 +12,19 @@
 <ion-content padding>
   <form (ngSubmit)="save()">
     <ion-item>
-      <ion-label floating>Title</ion-label>
+      <ion-label floating>제목</ion-label>
       <ion-input type="text" [(ngModel)]="title" name="title" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Note</ion-label>
+      <ion-label floating>노트</ion-label>
       <ion-textarea [(ngModel)]="note" name="note"></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-label floating>Due to</ion-label>
-      <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY MMMM DDDD" [(ngModel)]="dueDate" name="date" min="2018" max="2020-12-31">
+      <ion-label floating>마감일</ion-label>
+      <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY MMMM DDDD" [(ngModel)]="dueDate" (ionCancel)="resetDueDate()" cancelText="초기화" doneText="선택"
+        name="date" min="2018" max="2020-12-31">
       </ion-datetime>
     </ion-item>
-    <br>
-    <button ion-button type="submit" block>Save</button>
+    <button ion-button type="submit" block>저장</button>
   </form>
 </ion-content>
