@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators/map';
 
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
+import moment from 'moment';
 
 /**
  * Generated class for the ArchivePage page.
@@ -33,7 +34,8 @@ export class ArchivePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ArchivePage');
-    this.fetchItemsByUserId()
+    this.fetchItemsByUserId();
+    moment.locale('ko');
   }
 
   fetchItemsByUserId() {
@@ -56,5 +58,9 @@ export class ArchivePage {
 
   itemSelected(item) {
     this.navCtrl.push('TodoEditPage', { item })
+  }
+
+  formatDueDate(dueDate: number) {
+    return moment(dueDate).fromNow();
   }
 }

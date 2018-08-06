@@ -14,7 +14,7 @@
     <ion-item-sliding *ngFor="let item of archive | async">
       <ion-item (click)="itemSelected(item)">
         <h3>{{ item.title }}</h3>
-        <h4>{{ item.dueDate }}</h4>
+        <p *ngIf="item.dueDate > 0">{{ formatDueDate(item.dueDate) }}</p>
       </ion-item>
       <ion-item-options side="right">
         <button ion-button>Done</button>
