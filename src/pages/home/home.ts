@@ -9,7 +9,6 @@ import { Observable } from '../../../node_modules/rxjs';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  items: Observable<any[]>;
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
@@ -21,20 +20,6 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad')
-    this.fetchItemsByUserId()
-  }
-
-  fetchItemsByUserId() {
-    try {
-      this.afAuth.authState
-        .subscribe(user =>
-          this.items = this.afStore
-            .collection('tasks', ref => ref.where('userId', '==', user.uid).orderBy('createdAt', 'asc'))
-            .valueChanges()
-        )
-    } catch (error) {
-      console.error(error)
-    }
   }
 
   newTodo() {
@@ -67,4 +52,7 @@ export class HomePage {
     }, 2000);
   }
 
+  goArchive() {
+    this.navCtrl.push('ArchivePage')
+  }
 }
