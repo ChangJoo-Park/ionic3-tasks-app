@@ -8,14 +8,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name: 'TodoEditPage'
+})
 @Component({
   selector: 'page-todo-edit',
   templateUrl: 'todo-edit.html',
 })
 export class TodoEditPage {
-
+  item: Object;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    console.log('item :)')
+    this.item = this.navParams.get('item')
   }
 
   ionViewDidLoad() {
