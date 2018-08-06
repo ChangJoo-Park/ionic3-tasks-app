@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
+
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
-import { Observable } from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'page-home',
