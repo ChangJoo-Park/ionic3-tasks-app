@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Observable } from '../../../node_modules/rxjs';
+import { map } from 'rxjs/operators/map';
+import { Observable } from 'rxjs';
+
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
 
@@ -38,19 +40,21 @@ export class ArchivePage {
     try {
       this.afAuth.authState
         .subscribe(user => {
-          this.archive = this.afStore
+          const archiveCollection = this.afStore
             .collection('tasks', ref => ref
               .where('userId', '==', user.uid)
-              .where('dueDate', '==', 0)
+              // TODO: If list not found -> archive
               .where('done', '==', false)
               .orderBy('createdAt', 'asc')
             )
-            .valueChanges()
-        }
-        )
+          this.archive = archiveCollection.snapshotChanges().pipe(map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))))
+        })
     } catch (error) {
       console.error(error)
     }
   }
 
+  itemSelected(item) {
+    console.log('item => ', item)
+  }
 }
