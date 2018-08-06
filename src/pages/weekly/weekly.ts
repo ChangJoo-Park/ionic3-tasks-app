@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Observable } from '../../../node_modules/rxjs';
+
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
+import { Observable } from '../../../node_modules/rxjs';
 
 /**
  * Generated class for the WeeklyPage page.
@@ -38,7 +39,7 @@ export class WeeklyPage {
       const todayMidnight = new Date();
       todayMidnight.setHours(0, 0, 0, 0);
       const todayMidnightTimestamp = todayMidnight.getTime()
-      const nextWeekTimeStamp = todayMidnightTimestamp + (7 * (1000 * 60 * 60 * 24))
+      const nextWeekTimeStamp = todayMidnightTimestamp + (8 * (1000 * 60 * 60 * 24))
 
       this.afAuth.authState
         .subscribe(user => {
