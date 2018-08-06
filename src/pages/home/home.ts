@@ -55,4 +55,8 @@ export class HomePage {
   goArchive() {
     this.navCtrl.push('ArchivePage')
   }
+
+  goWeekly() {
+    this.navCtrl.push('WeeklyPage')
+  }
 }
