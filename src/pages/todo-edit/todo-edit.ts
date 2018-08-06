@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import moment from 'moment';
 /**
  * Generated class for the TodoEditPage page.
  *
@@ -17,16 +17,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TodoEditPage {
   item: Object;
+  dueDate: any = null;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log('item :)')
     this.item = this.navParams.get('item')
+    if (!this.item) {
+      this.navCtrl.goToRoot({});
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TodoEditPage');
+    if (this.item['dueDate']) {
+      console.log(this.item['dueDate'])
+      console.log(moment(this.item['dueDate']).format('YYYY/MM/DD'))
+      if (this.item['dueDate'] == 0) {
+        this.dueDate = null;
+      } else {
+        this.dueDate = new Date(this.item['dueDate']).toISOString();
+      }
+    }
   }
 
-  close() {
-    this.navCtrl.pop()
+  resetDueDate() {
+    this.dueDate = null;
   }
 }

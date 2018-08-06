@@ -12,10 +12,14 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-datetime displayFormat="MM/DD/YYYY" placeholder="Due Date"></ion-datetime>
+      <ion-label floating>마감일</ion-label>
+      <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY MMMM DDDD" [(ngModel)]="dueDate" (ionCancel)="resetDueDate()"
+        cancelText="초기화" doneText="선택" name="date" min="2018" max="2020-12-31">
+      </ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-textarea placeholder="Enter a description"></ion-textarea>
+      <ion-label floating>노트</ion-label>
+      <ion-textarea [(ngModel)]="item.note"></ion-textarea>
     </ion-item>
   </ion-list>
   <button ion-button (click)="close()" block>Close</button>
