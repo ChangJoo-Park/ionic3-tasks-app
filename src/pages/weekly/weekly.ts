@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
 import { Observable } from '../../../node_modules/rxjs';
+import { map } from 'rxjs/operators/map';
 
 /**
  * Generated class for the WeeklyPage page.
@@ -43,7 +44,7 @@ export class WeeklyPage {
 
       this.afAuth.authState
         .subscribe(user => {
-          this.items = this.afStore
+          const itemCollection = this.afStore
             .collection('tasks', ref => ref
               .where('userId', '==', user.uid)
               .where('dueDate', '>', todayMidnightTimestamp)
@@ -52,7 +53,7 @@ export class WeeklyPage {
               .orderBy('dueDate', 'asc')
               .orderBy('createdAt', 'asc')
             )
-            .valueChanges()
+          this.items = itemCollection.snapshotChanges().pipe(map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))))
         }
         )
     } catch (error) {
