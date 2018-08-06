@@ -26,16 +26,18 @@ export class TodoEditPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TodoEditPage');
     if (this.item['dueDate']) {
-      console.log(this.item['dueDate'])
-      console.log(moment(this.item['dueDate']).format('YYYY/MM/DD'))
       if (this.item['dueDate'] == 0) {
         this.dueDate = null;
       } else {
         this.dueDate = new Date(this.item['dueDate']).toISOString();
       }
     }
+  }
+
+  ionViewWillLeave() {
+    console.log('ionViewWillLeave')
+    console.log('update task')
   }
 
   resetDueDate() {
