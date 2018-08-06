@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { map } from 'rxjs/operators/map';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators/map';
 
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
@@ -55,6 +55,6 @@ export class ArchivePage {
   }
 
   itemSelected(item) {
-    console.log('item => ', item)
+    this.navCtrl.push('TodoEditPage', { item })
   }
 }
