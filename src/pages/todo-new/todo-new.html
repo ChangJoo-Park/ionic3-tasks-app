@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>New Task</ion-title>
+    <ion-title>새 태스크</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -21,8 +21,8 @@
     </ion-item>
     <ion-item>
       <ion-label floating>마감일</ion-label>
-      <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY MMMM DDDD" [(ngModel)]="dueDate" (ionCancel)="resetDueDate()" cancelText="초기화" doneText="선택"
-        name="date" min="2018" max="2020-12-31">
+      <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY MMMM DDDD" [(ngModel)]="dueDate" (ionCancel)="resetDueDate()"
+        cancelText="초기화" doneText="선택" name="date" min="2018" max="2020-12-31">
       </ion-datetime>
     </ion-item>
     <button ion-button type="submit" block>저장</button>
