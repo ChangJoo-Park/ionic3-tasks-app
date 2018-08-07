@@ -10,5 +10,12 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  <ion-list inset>
+    <ion-item>
+      <ion-icon name="add" item-start></ion-icon>
+      <ion-input type="text" placeholder="새 리스트 추가.." [(ngModel)]="newListTitle" (keyup.enter)="addNewList()"></ion-input>
+    </ion-item>
+  </ion-list>
+
   <h2>개발중입니다 :)</h2>
 </ion-content>
