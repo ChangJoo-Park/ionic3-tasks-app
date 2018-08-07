@@ -3,12 +3,16 @@ import { ModalController, NavController } from 'ionic-angular';
 
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
+import { Observable } from '../../../node_modules/rxjs';
+import { map } from '../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  list: Observable<Object[]>
+
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
@@ -20,6 +24,14 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad')
+    this.afAuth.authState.subscribe(user => {
+      if (!user) {
+        this.navCtrl.goToRoot({});
+      }
+      const userId = user.uid;
+      const listCollection = this.afStore.collection('list', ref => ref.where('users', 'array-contains', userId))
+      this.list = listCollection.snapshotChanges().pipe(map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))))
+    })
   }
 
   newTodo() {
@@ -41,6 +53,10 @@ export class HomePage {
   itemSelected(item) {
     const taskModal = this.modalCtrl.create('TodoEditPage', { item });
     taskModal.present()
+  }
+
+  listSelected(l) {
+    console.log(l);
   }
 
   doRefresh(refresher) {
