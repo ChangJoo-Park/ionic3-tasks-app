@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import moment from 'moment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators/map';
 
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
-import moment from 'moment';
+import { Task } from '../../models/Task';
 
 /**
  * Generated class for the ArchivePage page.
@@ -23,6 +24,8 @@ import moment from 'moment';
 })
 export class ArchivePage {
   archive: Observable<Object[]>;
+  newTaskTitle: string;
+  userId: string;
 
   constructor(
     public navCtrl: NavController,
@@ -34,6 +37,9 @@ export class ArchivePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ArchivePage');
+    this.afAuth.authState.subscribe(user => {
+      if (user) this.userId = user.uid
+    })
     this.fetchItemsByUserId();
     moment.locale('ko');
   }
@@ -53,6 +59,22 @@ export class ArchivePage {
         })
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  addNewTask() {
+    console.log("hello world");
+    try {
+      const newTask = (new Task(this.newTaskTitle, '', this.userId, '')).toJSON()
+      this.newTaskTitle = '';
+      window.blur();
+      this.afStore.collection('tasks')
+        .add(newTask)
+        .then(_ => { console.log('created'); });
+    } catch (error) {
+      console.error(error)
+    } finally {
+      console.log('ended')
     }
   }
 

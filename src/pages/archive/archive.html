@@ -10,6 +10,12 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-list inset>
+    <ion-item>
+      <ion-icon name="add" item-start></ion-icon>
+      <ion-input type="text" placeholder="새 태스크 추가.." [(ngModel)]="newTaskTitle" (keyup.enter)="addNewTask()"></ion-input>
+    </ion-item>
+  </ion-list>
   <ion-list>
     <ion-item-sliding *ngFor="let item of archive | async">
       <ion-item (click)="itemSelected(item)">
