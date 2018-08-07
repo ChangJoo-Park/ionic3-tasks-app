@@ -52,7 +52,7 @@ export class TodoEditPage {
     const updateItem = {
       title: this.item['title'],
       note: this.item['note'],
-      userId: this.item['userid'],
+      userId: this.item['userId'],
       dueDate: targetDueDate,
       done: this.item['done'],
       createdAt: this.item['createdAt'],
