@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import moment from 'moment';
+
+import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
+
 /**
  * Generated class for the TodoEditPage page.
  *
@@ -18,7 +20,11 @@ import moment from 'moment';
 export class TodoEditPage {
   item: Object;
   dueDate: any = null;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public afStore: AngularFirestore
+  ) {
     this.item = this.navParams.get('item')
     if (!this.item) {
       this.navCtrl.goToRoot({});
@@ -35,9 +41,14 @@ export class TodoEditPage {
     }
   }
 
-  ionViewWillLeave() {
-    console.log('ionViewWillLeave')
-    console.log('update task')
+  async ionViewWillLeave() {
+    const taskRef = this.afStore.collection('tasks').doc(this.item['$key'])
+    this.item['updatedAt'] = (new Date()).getTime();
+    const { title, note, userId, done, createdAt } = this.item;
+    const updateItem = {
+      title, note, userId, dueDate: this.dueDate === '' ? 0 : (new Date(this.dueDate)).getTime(), done, createdAt, updatedAt: (new Date()).getTime()
+    }
+    await taskRef.set(updateItem)
   }
 
   resetDueDate() {
