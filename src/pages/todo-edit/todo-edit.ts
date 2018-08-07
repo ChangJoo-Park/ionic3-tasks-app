@@ -41,17 +41,26 @@ export class TodoEditPage {
     }
   }
 
-  async ionViewWillLeave() {
+  ionViewWillLeave() {
+    this.updateItem();
+  }
+
+  async updateItem() {
     const taskRef = this.afStore.collection('tasks').doc(this.item['$key'])
     this.item['updatedAt'] = (new Date()).getTime();
     const { title, note, userId, done, createdAt } = this.item;
     const updateItem = {
-      title, note, userId, dueDate: this.dueDate === '' ? 0 : (new Date(this.dueDate)).getTime(), done, createdAt, updatedAt: (new Date()).getTime()
+      title, note, userId, dueDate: (this.dueDate === '' || !this.dueDate) ? 0 : (new Date(this.dueDate)).getTime(), done, createdAt, updatedAt: (new Date()).getTime()
     }
     await taskRef.set(updateItem)
   }
-
   resetDueDate() {
     this.dueDate = null;
+  }
+
+  done() {
+    this.item['done'] = true;
+    this.updateItem();
+    this.navCtrl.pop();
   }
 }
