@@ -49,8 +49,9 @@ export class TodoEditPage {
     const taskRef = this.afStore.collection('tasks').doc(this.item['$key'])
     this.item['updatedAt'] = (new Date()).getTime();
     const { title, note, userId, done, createdAt } = this.item;
+    const targetDueDate = (this.dueDate === '' || !this.dueDate) ? 0 : (new Date(this.dueDate)).getTime()
     const updateItem = {
-      title, note, userId, dueDate: (this.dueDate === '' || !this.dueDate) ? 0 : (new Date(this.dueDate)).getTime(), done, createdAt, updatedAt: (new Date()).getTime()
+      title, note, userId, dueDate: targetDueDate, done, createdAt, updatedAt: (new Date()).getTime()
     }
     await taskRef.set(updateItem)
   }
