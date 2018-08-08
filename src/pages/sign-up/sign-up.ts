@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
+
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 
 /**
@@ -15,8 +16,10 @@ import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
   templateUrl: 'sign-up.html',
 })
 export class SignUpPage {
-  email: string;
-  password: string;
+  email: string = '';
+  password: string = '';
+  displayName: string = '';
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,8 +36,13 @@ export class SignUpPage {
     const loader = this.loadingCtrl.create()
     loader.present()
     try {
-      await this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
-      this.navCtrl.pop()
+      console.log(this.displayName)
+      const credential = await this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
+      await credential.user.updateProfile({
+        displayName: this.displayName,
+        photoURL: credential.user.photoURL
+      })
+      this.navCtrl.popToRoot();
     } catch (error) {
       console.error(error)
     } finally {
