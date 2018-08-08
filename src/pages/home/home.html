@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>
       <span (click)="setting()">
-        <img src="https://picsum.photos/24" style="vertical-align: middle;">
+        <img id="avatar" style="vertical-align: middle; border-radius: 100%;" width="32px" height="32px">
         <span *ngIf="currentUser">{{ currentUser['displayName'] || ''}}</span>
       </span>
     </ion-title>

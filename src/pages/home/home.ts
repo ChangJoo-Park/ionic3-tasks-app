@@ -6,6 +6,8 @@ import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
 import { Observable } from '../../../node_modules/rxjs';
 import { map } from '../../../node_modules/rxjs/operators';
 
+declare var require: any;
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -13,6 +15,7 @@ import { map } from '../../../node_modules/rxjs/operators';
 export class HomePage {
   list: Observable<Object[]>;
   currentUser: firebase.User;
+  avatar: any;
 
   constructor(
     public navCtrl: NavController,
@@ -32,6 +35,14 @@ export class HomePage {
       const userId = user.uid;
       const listCollection = this.afStore.collection('list', ref => ref.where('users', 'array-contains', userId))
       this.list = listCollection.snapshotChanges().pipe(map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))))
+      // TODO: using real avatar when user changes
+      const Avatar = require('avatar-initials');
+      new Avatar(document.getElementById('avatar'), {
+        useGravatar: true,
+        size: 32,
+        email: this.currentUser.email
+      });
+
     })
   }
 
