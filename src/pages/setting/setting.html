@@ -6,9 +6,16 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Setting</ion-title>
+    <ion-title>설정</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
+  <ion-list *ngIf="currentUser">
+    <ion-list-header>계정 설정</ion-list-header>
+    <button ion-item (click)="updateDisplayName()">
+      사용자 이름
+      <ion-note item-end>{{ currentUser['displayName'] || '' }}</ion-note>
+    </button>
+  </ion-list>
   <button ion-button color="danger" (click)="signOut()" full>SignOut</button>
 </ion-content>
