@@ -11,7 +11,8 @@ import { map } from '../../../node_modules/rxjs/operators';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  list: Observable<Object[]>
+  list: Observable<Object[]>;
+  currentUser: firebase.User;
 
   constructor(
     public navCtrl: NavController,
@@ -19,7 +20,6 @@ export class HomePage {
     public afAuth: AngularFireAuth,
     public afStore: AngularFirestore
   ) {
-
   }
 
   ionViewDidLoad() {
@@ -28,6 +28,7 @@ export class HomePage {
       if (!user) {
         this.navCtrl.goToRoot({});
       }
+      this.currentUser = user
       const userId = user.uid;
       const listCollection = this.afStore.collection('list', ref => ref.where('users', 'array-contains', userId))
       this.list = listCollection.snapshotChanges().pipe(map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))))
