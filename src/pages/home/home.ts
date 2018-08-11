@@ -4,7 +4,7 @@ import { ModalController, NavController } from 'ionic-angular';
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
 import { Observable } from '../../../node_modules/rxjs';
-import { map } from '../../../node_modules/rxjs/operators';
+import { StoreProvider } from '../../providers/store/store';
 
 declare var require: any;
 
@@ -14,6 +14,8 @@ declare var require: any;
 })
 export class HomePage {
   list: Observable<Object[]>;
+  archived: Observable<Object[]>;
+  weekly: Observable<Object[]>;
   currentUser: firebase.User;
   avatar: any;
 
@@ -21,28 +23,20 @@ export class HomePage {
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     public afAuth: AngularFireAuth,
-    public afStore: AngularFirestore
-  ) {
-  }
+    public afStore: AngularFirestore,
+    public storeProvider: StoreProvider
+  ) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad')
     this.afAuth.authState.subscribe(user => {
       if (!user) {
         this.navCtrl.goToRoot({});
       }
       this.currentUser = user
-      const userId = user.uid;
-      const listCollection = this.afStore.collection('list', ref => ref.where('users', 'array-contains', userId))
-      this.list = listCollection.snapshotChanges().pipe(map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))))
-      // TODO: using real avatar when user changes
-      const Avatar = require('avatar-initials');
-      new Avatar(document.getElementById('avatar'), {
-        useGravatar: true,
-        size: 32,
-        email: this.currentUser.email
-      });
-
+      this.archived = this.storeProvider.fetchItemsByUserId(user)
+      this.list = this.storeProvider.fetchListByUser(user)
+      this.weekly = this.storeProvider.fetchWeeklyByUser(user)
+      this.drawAvatar();
     })
   }
 
@@ -71,20 +65,21 @@ export class HomePage {
     console.log(l);
   }
 
-  doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
-  }
-
   goArchive() {
     this.navCtrl.push('ArchivePage')
   }
 
   goWeekly() {
     this.navCtrl.push('WeeklyPage')
+  }
+
+  drawAvatar() {
+    // TODO: using real avatar when user changes
+    const Avatar = require('avatar-initials');
+    new Avatar(document.getElementById('avatar'), {
+      useGravatar: true,
+      size: 32,
+      email: this.currentUser.email
+    });
   }
 }

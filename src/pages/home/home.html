@@ -14,17 +14,16 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <ion-list>
     <button ion-item (click)="goArchive()">
       <ion-icon name="archive" item-start></ion-icon>
       수신함
+      <ion-note item-end>{{ (archived | async)?.length }}</ion-note>
     </button>
     <button ion-item (click)="goWeekly()">
       <ion-icon name="calendar" item-start></ion-icon>
       주
+      <ion-note item-end>{{ (weekly | async)?.length }}</ion-note>
     </button>
     <button ion-item>
       <ion-icon name="done-all" item-start></ion-icon>
