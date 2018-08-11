@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
 import { Observable } from '../../../node_modules/rxjs';
-import { map } from 'rxjs/operators/map';
+import { StoreProvider } from '../../providers/store/store';
 
 /**
  * Generated class for the WeeklyPage page.
@@ -27,38 +27,17 @@ export class WeeklyPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public afAuth: AngularFireAuth,
-    public afStore: AngularFirestore
+    public afStore: AngularFirestore,
+    public storeProvider: StoreProvider
   ) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WeeklyPage');
     this.fetchItemsByUserId()
   }
 
   fetchItemsByUserId() {
-    try {
-      const todayMidnight = new Date();
-      todayMidnight.setHours(0, 0, 0, 0);
-      const todayMidnightTimestamp = todayMidnight.getTime()
-      const nextWeekTimeStamp = todayMidnightTimestamp + (8 * (1000 * 60 * 60 * 24))
-
-      this.afAuth.authState
-        .subscribe(user => {
-          const itemCollection = this.afStore
-            .collection('tasks', ref => ref
-              .where('userId', '==', user.uid)
-              .where('dueDate', '>', todayMidnightTimestamp)
-              .where('dueDate', '<', nextWeekTimeStamp)
-              .where('done', '==', false)
-              .orderBy('dueDate', 'asc')
-              .orderBy('createdAt', 'asc')
-            )
-          this.items = itemCollection.snapshotChanges().pipe(map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))))
-        }
-        )
-    } catch (error) {
-      console.error(error)
-    }
+    this.afAuth.authState.subscribe(user => {
+      this.items = this.storeProvider.fetchWeeklyByUser(user)
+    })
   }
-
 }
