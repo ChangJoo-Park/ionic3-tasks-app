@@ -57,7 +57,17 @@ export class StoreProvider {
         .orderBy('dueDate', 'asc')
         .orderBy('createdAt', 'asc')
       )
-    return itemCollection.snapshotChanges().pipe(map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))))
+    return itemCollection
+      .snapshotChanges()
+      .pipe(
+        map(
+          actions => actions.map(
+            action => ({
+              $key: action.payload.doc.id, ...action.payload.doc.data()
+            })
+          )
+        )
+      )
   }
   fetchListByUser(user) {
     const listCollection = this.afStore
