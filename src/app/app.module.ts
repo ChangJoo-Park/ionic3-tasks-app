@@ -11,6 +11,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { MyApp } from './app.component';
+import { StoreProvider } from '../providers/store/store';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDXMLLo-P2DGPuuA0dT6hwYcrwRAWB0Wqo",
@@ -49,7 +50,8 @@ const firebaseConfig = {
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AngularFireAuth,
-    AngularFirestore
+    AngularFirestore,
+    StoreProvider
   ]
 })
 export class AppModule { }
