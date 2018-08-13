@@ -10,7 +10,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-item *ngFor="let item of items | async">
-    {{ item | json }}
-  </ion-item>
+  <ion-list>
+    <div *ngFor="let item of items | async as tasks; let i = index;">
+      <div *ngIf="i === 0"> {{ item.dueDate | date: ll }}</div>
+      <div *ngIf="(i !== 0 && i !== tasks.length - 1) && (tasks[i + 1].dueDate !== item.dueDate)"> {{ item.dueDate | date: ll }}</div>
+      <div *ngIf="(i === tasks.length - 1) && (tasks[i - 1].dueDate !== item.dueDate)"> {{ item.dueDate | date: ll }}</div>
+      <ion-item>
+        {{ item.title }} | {{ i }}
+      </ion-item>
+    </div>
+  </ion-list>
 </ion-content>
