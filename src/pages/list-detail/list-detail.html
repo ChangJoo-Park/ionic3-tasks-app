@@ -5,14 +5,26 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>list-detail</ion-title>
+    <ion-title>{{ list.title }}</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
-<ion-content padding>
-
+<ion-content>
+  <ion-list inset>
+    <ion-item>
+      <ion-icon name="add" item-start></ion-icon>
+      <ion-input type="text" placeholder="새 태스크 추가.." [(ngModel)]="newTaskTitle" (keyup.enter)="addNewTask()"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of tasks | async">
+      <ion-item>
+        <h3>{{ item.title }}</h3>
+        <p *ngIf="item.dueDate > 0">{{ item.dueDate }}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button>Done</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
