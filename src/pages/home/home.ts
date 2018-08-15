@@ -61,8 +61,8 @@ export class HomePage {
     taskModal.present()
   }
 
-  listSelected(l) {
-    console.log(l);
+  listSelected(list) {
+    this.navCtrl.push('ListDetailPage', { list })
   }
 
   goArchive() {
