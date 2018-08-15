@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import moment from 'moment';
+
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
 import { Observable } from '../../../node_modules/rxjs';
