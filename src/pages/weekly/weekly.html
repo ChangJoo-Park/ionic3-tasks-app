@@ -17,9 +17,10 @@
         {{ formatDueDate(item.dueDate) }}
       </div>
       <div *ngIf="i !== 0 && (i === tasks.length - 1) && (tasks[i - 1].dueDate !== item.dueDate)"> {{ formatDueDate(item.dueDate)
-        }}</div>
+        }}
+      </div>
       <ion-item>
-        {{ item.title }} | {{ i }}
+        {{ item.title }}
       </ion-item>
     </div>
   </ion-list>
