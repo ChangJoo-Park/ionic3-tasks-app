@@ -51,6 +51,7 @@ export class ArchivePage {
           const archiveCollection = this.afStore
             .collection('tasks', ref => ref
               .where('userId', '==', user.uid)
+              .where('listId', '==', '')
               // TODO: If list not found -> archive
               .where('done', '==', false)
               .orderBy('createdAt', 'asc')
@@ -66,6 +67,7 @@ export class ArchivePage {
     console.log("hello world");
     try {
       const newTask = (new Task(this.newTaskTitle, '', this.userId, '')).toJSON()
+      newTask['listId'] = '';
       this.newTaskTitle = '';
       window.blur();
       this.afStore.collection('tasks')
