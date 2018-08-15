@@ -26,6 +26,7 @@ export class StoreProvider {
     const archiveCollection = this.afStore
       .collection('tasks', ref => ref
         .where('userId', '==', user.uid)
+        .where('listId', '==', '')
         // TODO: If list not found -> archive
         .where('done', '==', false)
         .orderBy('createdAt', 'asc')
