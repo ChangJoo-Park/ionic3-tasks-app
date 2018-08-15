@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import moment from 'moment';
 import { AngularFireAuth } from '../../../node_modules/angularfire2/auth';
 import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
 import { Observable } from '../../../node_modules/rxjs';
@@ -33,11 +33,16 @@ export class WeeklyPage {
 
   ionViewDidLoad() {
     this.fetchItemsByUserId()
+    moment.locale('ko');
   }
 
   fetchItemsByUserId() {
     this.afAuth.authState.subscribe(user => {
       this.items = this.storeProvider.fetchWeeklyByUser(user)
     })
+  }
+
+  formatDueDate(dueDate: number) {
+    return moment(dueDate).fromNow();
   }
 }

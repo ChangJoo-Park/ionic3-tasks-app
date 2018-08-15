@@ -12,9 +12,11 @@
 <ion-content padding>
   <ion-list>
     <div *ngFor="let item of items | async as tasks; let i = index;">
-      <div *ngIf="i === 0"> {{ item.dueDate | date: ll }}</div>
-      <div *ngIf="(i !== 0 && i !== tasks.length - 1) && (tasks[i + 1].dueDate !== item.dueDate)"> {{ item.dueDate | date: ll }}</div>
-      <div *ngIf="(i === tasks.length - 1) && (tasks[i - 1].dueDate !== item.dueDate)"> {{ item.dueDate | date: ll }}</div>
+      <div *ngIf="i === 0"> {{ formatDueDate(item.dueDate) }}</div>
+      <div *ngIf="(i !== 0 && i !== tasks.length - 1) && ((tasks[i - 1].dueDate !== item.dueDate) || (tasks[i + 1].dueDate !== item.dueDate))">
+        {{ formatDueDate(item.dueDate) }}
+      </div>
+      <div *ngIf="(i === tasks.length - 1) && (tasks[i - 1].dueDate !== item.dueDate)"> {{ formatDueDate(item.dueDate) }}</div>
       <ion-item>
         {{ item.title }} | {{ i }}
       </ion-item>
