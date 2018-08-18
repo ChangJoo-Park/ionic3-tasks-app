@@ -47,7 +47,8 @@ export class StoreProvider {
     const todayMidnight = new Date();
     todayMidnight.setHours(0, 0, 0, 0);
     const todayMidnightTimestamp = todayMidnight.getTime()
-    const nextWeekTimeStamp = todayMidnightTimestamp + (8 * (1000 * 60 * 60 * 24))
+    const NEXT_8_DAYS = (8 * (1000 * 60 * 60 * 24))
+    const nextWeekTimeStamp = todayMidnightTimestamp + NEXT_8_DAYS
 
     const itemCollection = this.afStore
       .collection('tasks', ref => ref
