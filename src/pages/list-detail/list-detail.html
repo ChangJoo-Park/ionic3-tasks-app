@@ -18,10 +18,10 @@
   </ion-list>
   <ion-list>
     <ion-item-sliding *ngFor="let item of tasks | async">
-      <ion-item (click)="itemSelected(item)">
+      <button ion-item (click)="itemSelected(item)">
         <h3>{{ item.title }}</h3>
         <p *ngIf="item.dueDate > 0">{{ item.dueDate }}</p>
-      </ion-item>
+      </button>
       <ion-item-options side="right">
         <button ion-button>Done</button>
       </ion-item-options>
