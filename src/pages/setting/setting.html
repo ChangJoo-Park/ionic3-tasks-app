@@ -16,6 +16,18 @@
       사용자 이름
       <ion-note item-end>{{ currentUser['displayName'] || '' }}</ion-note>
     </button>
+    <ion-item>
+      리뷰 쓰기
+    </ion-item>
+    <ion-item>
+      문의하기
+    </ion-item>
+    <ion-item>
+      버전 정보
+      <ion-note item-end>
+        0.0.1
+      </ion-note>
+    </ion-item>
   </ion-list>
-  <button ion-button color="danger" (click)="signOut()" full>SignOut</button>
+  <button ion-button color="danger" (click)="signOut()" full>로그아웃</button>
 </ion-content>
