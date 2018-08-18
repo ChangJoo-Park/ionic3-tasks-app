@@ -7,12 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>all</ion-title>
+    <ion-title>모두</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <button ion-item (click)="itemSelected(item)" *ngFor="let item of items | async">
+      <h3>{{ item.title }}</h3>
+      <p *ngIf="item.dueDate > 0">{{ formatDueDate(item.dueDate) }}</p>
+    </button>
+  </ion-list>
 </ion-content>
