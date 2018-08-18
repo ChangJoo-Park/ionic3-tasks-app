@@ -56,6 +56,7 @@ export class TodoEditPage {
       dueDate: targetDueDate,
       done: this.item['done'],
       createdAt: this.item['createdAt'],
+      listId: this.item['listId'],
       updatedAt: (new Date()).getTime()
     }
     await taskRef.set(updateItem)
