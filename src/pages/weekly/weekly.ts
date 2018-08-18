@@ -46,4 +46,8 @@ export class WeeklyPage {
   formatDueDate(dueDate: number) {
     return moment(dueDate).fromNow();
   }
+
+  itemSelected(item) {
+    this.navCtrl.push('TodoEditPage', { item })
+  }
 }

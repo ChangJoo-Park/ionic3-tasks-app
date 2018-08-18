@@ -19,9 +19,9 @@
       <div *ngIf="i !== 0 && (i === tasks.length - 1) && (tasks[i - 1].dueDate !== item.dueDate)"> {{ formatDueDate(item.dueDate)
         }}
       </div>
-      <ion-item>
+      <button ion-item (click)="itemSelected(item)">
         {{ item.title }}
-      </ion-item>
+      </button>
     </div>
   </ion-list>
 </ion-content>
