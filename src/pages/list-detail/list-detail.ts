@@ -81,4 +81,8 @@ export class ListDetailPage {
       console.log('ended')
     }
   }
+
+  itemSelected(item) {
+    this.navCtrl.push('TodoEditPage', { item })
+  }
 }
