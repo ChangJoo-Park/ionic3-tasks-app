@@ -73,6 +73,10 @@ export class HomePage {
     this.navCtrl.push('WeeklyPage')
   }
 
+  goAll() {
+    this.navCtrl.push('AllPage')
+  }
+
   drawAvatar() {
     // TODO: using real avatar when user changes
     const Avatar = require('avatar-initials');

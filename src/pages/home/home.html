@@ -25,7 +25,7 @@
       주
       <ion-note item-end>{{ (weekly | async)?.length }}</ion-note>
     </button>
-    <button ion-item>
+    <button ion-item (click)="goAll()">
       <ion-icon name="done-all" item-start></ion-icon>
       모두
     </button>
